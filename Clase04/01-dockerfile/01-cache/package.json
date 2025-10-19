@@ -1,0 +1,22 @@
+{
+    "name": "mi-web-bootstrap",
+    "version": "1.0.0",
+    "description": "Una web simple con Bootstrap",
+    "main": "index.html",
+    "scripts": {
+        "start": "npx http-server -p 3000"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.2"
+    },
+    "devDependencies": {
+        "http-server": "^14.1.1"
+    },
+    "keywords": [
+        "bootstrap",
+        "responsive",
+        "web"
+    ],
+    "author": "",
+    "license": "MIT"
+}

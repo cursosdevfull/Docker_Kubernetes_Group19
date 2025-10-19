@@ -1,0 +1,106 @@
+services:
+  server-mysql:
+    image: mysql:8
+    container_name: server-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: db_products
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3306:3306"
+    networks:
+      - net-compose
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 10s
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  client-mysql:
+    image: phpmyadmin
+    container_name: client-mysql
+    environment:
+      PMA_HOST: server-mysql
+      PMA_USER: user
+      PMA_PASSWORD: 12345
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 10s
+    networks:
+      - net-compose
+
+  server-backend:
+    image: backend-image
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: server-backend
+    ports:
+      - "5000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 10s
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+    networks:
+      - net-compose
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+
+  server-frontend:
+    image: frontend-image
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: server-frontend
+    ports:
+      - "7000:4000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 10s
+    depends_on:
+      server-backend:
+        condition: service_healthy
+    networks:
+      - net-compose
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+
+networks:
+  net-compose:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Web con Bootstrap 5.0</title>
+    <!-- Bootstrap CSS desde node_modules -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mi Web</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicios">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold text-primary">Bienvenido a Mi Web</h1>
+                    <p class="lead">Una página web moderna y responsive creada con Bootstrap 5</p>
+                    <a href="#servicios" class="btn btn-primary btn-lg">Ver Servicios</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
+                        style="height: 300px;">
+                        <span class="text-white fs-2">Imagen Principal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Nuestros Servicios</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                style="width: 80px; height: 80px;">
+                                <span class="text-white fs-3">🌐</span>
+                            </div>
+                            <h5 class="card-title">Desarrollo Web</h5>
+                            <p class="card-text">Creamos sitios web modernos y responsivos utilizando las últimas
+                                tecnologías.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                style="width: 80px; height: 80px;">
+                                <span class="text-white fs-3">📱</span>
+                            </div>
+                            <h5 class="card-title">Aplicaciones Móviles</h5>
+                            <p class="card-text">Desarrollamos aplicaciones móviles nativas y híbridas para iOS y
+                                Android.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-info rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                style="width: 80px; height: 80px;">
+                                <span class="text-white fs-3">☁️</span>
+                            </div>
+                            <h5 class="card-title">Servicios en la Nube</h5>
+                            <p class="card-text">Implementamos soluciones escalables en plataformas cloud como AWS y
+                                Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">¿Por qué elegirnos?</h2>
+                    <p class="lead mb-4">Ofrecemos soluciones tecnológicas de alta calidad con un enfoque en la
+                        experiencia del usuario.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 60px; height: 60px;">
+                            <span class="text-white fs-4">⚡</span>
+                        </div>
+                        <h5>Rápido</h5>
+                        <p class="text-muted">Entrega rápida de proyectos sin comprometer la calidad.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 60px; height: 60px;">
+                            <span class="text-white fs-4">🎯</span>
+                        </div>
+                        <h5>Preciso</h5>
+                        <p class="text-muted">Cumplimos exactamente con los requisitos del cliente.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="bg-info rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 60px; height: 60px;">
+                            <span class="text-white fs-4">🔒</span>
+                        </div>
+                        <h5>Seguro</h5>
+                        <p class="text-muted">Implementamos las mejores prácticas de seguridad.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center">
+                        <div class="bg-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 60px; height: 60px;">
+                            <span class="text-white fs-4">🚀</span>
+                        </div>
+                        <h5>Innovador</h5>
+                        <p class="text-muted">Utilizamos tecnologías de vanguardia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-5">Contáctanos</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mensaje" class="form-label">Mensaje</label>
+                                    <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ps-md-4">
+                                <h5>Información de Contacto</h5>
+                                <div class="mb-3">
+                                    <strong>📧 Email:</strong><br>
+                                    info@miweb.com
+                                </div>
+                                <div class="mb-3">
+                                    <strong>📞 Teléfono:</strong><br>
+                                    +1 (555) 123-4567
+                                </div>
+                                <div class="mb-3">
+                                    <strong>📍 Dirección:</strong><br>
+                                    123 Calle Principal<br>
+                                    Ciudad, País 12345
+                                </div>
+                                <div class="mb-3">
+                                    <strong>🕒 Horarios:</strong><br>
+                                    Lun - Vie: 9:00 AM - 6:00 PM<br>
+                                    Sáb: 10:00 AM - 2:00 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Mi Web. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Desarrollado con ❤️ y Bootstrap</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS desde node_modules -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
