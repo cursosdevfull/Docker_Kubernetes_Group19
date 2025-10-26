@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      env: dev
+      app: frontend
+  template:
+    metadata:
+      labels:
+        env: dev
+        app: frontend
+    spec:
+      containers:
+        - name: container-python
+          image: python:3.6-alpine
+          command: [
+            "sh",
+            "-c",
+            "echo 'webpage created by Python' > index.html && python -m http.server 8080"
+          ]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-python
+spec:
+  type: LoadBalancer
+  selector:
+    env: dev
+    app: frontend
+  ports:
+    - port: 3000
+      targetPort: 8080
+      protocol: TCP
+      name: port-web

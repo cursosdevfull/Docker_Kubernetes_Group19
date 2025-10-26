@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-dev
+  labels:
+    app: frontend
+    env: dev
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-parameters
+  namespace: ns-dev
+data:
+  domain: https://dev-api.company.com
+  apiUrl: https://dev-api.company.com/api/v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx
+  namespace: ns-dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      env: dev
+      app: frontend
+  template:
+    metadata:
+      labels:
+        env: dev
+        app: frontend
+    spec:
+      containers:
+        - name: container
+          image: nginx:alpine
+          env:
+            - name: TITLE
+              value: "Frontend App"
+            - name: DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-parameters
+                  key: domain
+            - name: API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-parameters
+                  key: apiUrl

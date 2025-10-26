@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      env: dev
+      app: frontend
+  template:
+    metadata:
+      labels:
+        env: dev
+        app: frontend
+    spec:
+      containers:
+        - name: container-python
+          image: python:3.6-alpine
+          command: [
+            "sh",
+            "-c",
+            "echo 'webpage created by Python' > index.html && python -m http.server 8080"
+          ]
