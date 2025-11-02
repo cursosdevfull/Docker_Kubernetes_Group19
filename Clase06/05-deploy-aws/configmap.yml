@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: parameters
+data:
+  PORT_FRONTEND: "9000"
+  PORT_BACKEND1: "4500"
+  PORT_BACKEND2: "5000"
+  BACKEND1_URL: api/productos
+  BACKEND2_URL: http://backend2-svc/api/productos

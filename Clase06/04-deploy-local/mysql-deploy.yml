@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: mysql
+        env: dev
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_PASS_ROOT
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_PASS
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_NAME    
+          livenessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 10                                                            

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: frontend
+        env: dev
+    spec:
+      containers:
+        - name: frontend
+          image: localhost:5000/frontend:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: parameters
+                  key: PORT_FRONTEND
+            - name: BACKEND1_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: parameters
+                  key: BACKEND1_URL           
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 9000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9000
+            initialDelaySeconds: 3
+            periodSeconds: 3                                                          
