@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-backend2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend2
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: backend2
+        env: dev
+    spec:
+      containers:
+        - name: backend2
+          image: gcr.io/docker08/backend2:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: parameters
+                  key: PORT_BACKEND2
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_USER                  
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_PASS
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_NAME    
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: parameters-secret
+                  key: DB_PORT                   
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 3                                                          
